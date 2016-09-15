@@ -1,10 +1,10 @@
-const path = require("path");
+var path = require("path");
 
 module.exports = {
   context: __dirname,
-  entry: "./frontend/chordear.jsx",
+  entry: "./lib/frontend/chordear.jsx",
   output: {
-    path: path.join(__dirname),
+    path: path.join(__dirname, 'lib', 'assets'),
     filename: "bundle.js"
   },
   module: {
