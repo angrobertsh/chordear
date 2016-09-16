@@ -70,8 +70,9 @@ class Chordselect extends React.Component{
     document.getElementById(majmin).checked = true;
     document.getElementById(letter).checked = true;
 
+    this.setState({majmin: majmin, rootchoice: letter})
+
     this.changeMessage(letter, majmin);
-    this.forceUpdate();
   }
 
   playChord(){
@@ -197,7 +198,7 @@ class Chordselect extends React.Component{
         <div className="subkeyboardholder">
           <div className="sharpholder hard">{displaySharps}</div>
           <div className="regholder hard">{displayRegs}</div>
-          <div className="optionbox"><button className="playbutton" onClick={this.playChord}>Replay</button><button className="shufflebutton" onClick={this.selectRandomChord}>Shuffle</button><button className="hardbutton" onClick={this.hardmode}>Hard Mode</button></div>
+          <div className="optionbox"><button className="playbutton" onClick={this.playChord}><img src="http://res.cloudinary.com/dujcpxlhk/image/upload/v1474012677/i2venetyavxccykpphye.png" /></button><button className="shufflebutton" onClick={this.selectRandomChord}><img src="http://res.cloudinary.com/dujcpxlhk/image/upload/v1474012770/prwsmvpx4w38jrs9rpnh.png" /></button><button className="hardbutton" onClick={this.hardmode}>Hard Mode</button></div>
         </div>
       </div>);
   }
