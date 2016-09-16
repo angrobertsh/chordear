@@ -19,7 +19,8 @@ class Chordselect extends React.Component{
       majmin: "",
       rootchoice: "",
       notes: [],
-      active: []
+      active: [],
+      hard: true
     }
     for(let i = 0; i < this.freqsharps.length; i++)
     {
@@ -30,12 +31,26 @@ class Chordselect extends React.Component{
       this.state.notes.push(new Note(this.freqregs[j], this.keyregs[j]))
     }
 
+    this.hardmode = this.hardmode.bind(this);
     this.playChord = this.playChord.bind(this);
     this.stopChords = this.stopChords.bind(this);
     this.selectRandomChord = this.selectRandomChord.bind(this);
     this.update = this.update.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.chordSelectForm = this.chordSelectForm.bind(this);
+    this.changeMessage = this.changeMessage.bind(this);
+  }
+
+  changeMessage(letter, majmin){
+    if(letter.slice(-1) === "S"){
+      letter = letter.substring(0, letter.length-1);
+      letter = letter + "#";
+    }
+    if(this.state.hard === false){
+      $(".message").html(`Play the <span class="hardnone none">${letter} ${majmin}</span> chord!`);
+    } else {
+      $(".message").html(`Play the <span class="hardnone">${letter} ${majmin}</span> chord!`);
+    }
   }
 
   selectRandomChord(){
@@ -54,6 +69,9 @@ class Chordselect extends React.Component{
 
     document.getElementById(majmin).checked = true;
     document.getElementById(letter).checked = true;
+
+    this.changeMessage(letter, majmin);
+    this.forceUpdate();
   }
 
   playChord(){
@@ -63,7 +81,7 @@ class Chordselect extends React.Component{
          this.state.active.push(this.state.notes[j].letter);
       }
     }
-    this.render();
+    this.forceUpdate();
     setTimeout(this.stopChords, 700);
   }
 
@@ -71,14 +89,19 @@ class Chordselect extends React.Component{
     for(let m = 0; m < this.state.notes.length; m++){
       this.state.notes[m].stop();
     }
-    this.state.active = [];
+    this.setState({active: []});
+    this.forceUpdate();
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    debugger
     if(this.state.majmin !== "" && this.state.rootchoice !== ""){
-		  this.props.selectChord( this.state.majmin, this.state.rootchoice );
+      let letter = this.state.rootchoice;
+      this.changeMessage(letter, this.state.majmin);
+      this.props.selectChord( this.state.majmin, this.state.rootchoice );
       this.state.newchordvar = true;
+      this.forceUpdate();
     } else {
       alert("Please select a chord.")
     }
@@ -98,15 +121,18 @@ class Chordselect extends React.Component{
   chordSelectForm () {
     return (
       <form onSubmit={this.handleSubmit} className="chordform">
+        Pick a chord!
+        <br/>
+        <br/>
         <div className="majorminor">
-          <div>Chord Type:</div>
+          <div>Type:</div>
           <input type="radio" id="major" name="majmin" onChange={this.update("majmin")} value="major" className="majminchoice" /> Major
           <br/>
           <input type="radio" id="minor" name="majmin" onChange={this.update("majmin")} value="minor" className="majminchoice" /> Minor
           <br/>
         </div>
         <div className="chordname">
-          <div>Chord Root:</div>
+          <div>Root:</div>
           <input type="radio" id="a" name="letter" onChange={this.update("rootchoice")} value="a" className="rootchoice" /> A
           <br/>
           <input type="radio" id="aS" name="letter" onChange={this.update("rootchoice")} value="aS" className="rootchoice" /> A#
@@ -132,14 +158,30 @@ class Chordselect extends React.Component{
           <input type="radio" id="gS" name="letter" onChange={this.update("rootchoice")} value="gS" className="rootchoice" /> G#
           <br/>
         </div>
-        <button className="submitbutton">Submit</button>
+        <br/>
+        <button className="submitbutton">Select</button>
       </form>);
+  }
+
+  hardmode() {
+    if(this.state.hard){
+      $(".hard").addClass("hidden");
+      $(".hardnone").addClass("none");
+      this.state.hard = false;
+      $(".hardbutton").html("Easy Mode");
+    } else {
+      $(".hard").removeClass("hidden");
+      $(".hardnone").removeClass("none");
+      this.state.hard = true;
+      $(".hardbutton").html("Hard Mode");
+    }
+    this.forceUpdate();
   }
 
 
   render() {
     const displaySharps = this.keysharps.map((number, idx) => {
-      return (<SharpKey key={idx} scale={TONE_UTILS.NOTE_MAP_INVERTED[number]} pressed={this.state.active.includes(number.toString())}/>);
+      return (<SharpKey key={idx} scale={TONE_UTILS.NOTE_MAP_INVERTED[number]} pressed={this.state.active.includes(number)}/>);
     });
 
     const displayRegs = this.keyregs.map((letter, idx) => {
@@ -148,13 +190,14 @@ class Chordselect extends React.Component{
 
     return (
       <div className="chordselectcontainer">
-        <div className="chordselectformcontainer">
+        <div className="help"><p className="hard">(Watch me for help!)</p></div>
+        <div className="chordselectformcontainer hard">
           {this.chordSelectForm()}
         </div>
         <div className="subkeyboardholder">
-          <div className="sharpholder">{displaySharps}</div>
-          <div className="regholder">{displayRegs}</div>
-          <div className="optionbox"><button className="shufflebutton" onClick={this.selectRandomChord}>Shuffle</button><button className="playbutton" onClick={this.playChord}>Play</button></div>
+          <div className="sharpholder hard">{displaySharps}</div>
+          <div className="regholder hard">{displayRegs}</div>
+          <div className="optionbox"><button className="playbutton" onClick={this.playChord}>Replay</button><button className="shufflebutton" onClick={this.selectRandomChord}>Shuffle</button><button className="hardbutton" onClick={this.hardmode}>Hard Mode</button></div>
         </div>
       </div>);
   }
