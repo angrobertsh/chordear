@@ -1,5 +1,5 @@
 # CHORDEAR
-  See CHORDEAR live [here!](https://github.com/angrobertsh/chordear/blob/master/lib/index.html)
+  See CHORDEAR live [here!](https://angrobertsh.github.io/chordear/)
 
 ## Instructions
   CHORDEAR is here to help people train their musical ear by playing chords and having you play them back! Press keys in the qwe row to play white notes, and the 123 row to play black notes. When you strike the correct chord, you'll get a point.
