@@ -96,7 +96,6 @@ class Chordselect extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault();
-    debugger
     if(this.state.majmin !== "" && this.state.rootchoice !== ""){
       let letter = this.state.rootchoice;
       this.changeMessage(letter, this.state.majmin);
