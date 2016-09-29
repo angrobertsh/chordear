@@ -23,7 +23,7 @@ class Tutorial extends React.Component{
           {
             step: 1,
             selector: ".shufflebutton",
-            body: <div style={{color: "green"}}>Get a random chord!</div>,
+            body: <div style={{color: "green"}}>Get a random chord!</div>
           },
           {
             step: 2,
