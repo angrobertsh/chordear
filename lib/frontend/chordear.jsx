@@ -12,5 +12,4 @@ document.addEventListener('DOMContentLoaded', () => {
   window.store = store;
   const rootdiv = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, rootdiv);
-  // ReactDOM.render(<div>"Your bundle is working properly"</div>, rootdiv);
 });
