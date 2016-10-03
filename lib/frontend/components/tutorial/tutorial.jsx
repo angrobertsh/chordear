@@ -22,28 +22,36 @@ class Tutorial extends React.Component{
         steps={[
           {
             step: 1,
-            selector: ".shufflebutton",
-            body: <div style={{color: "green"}}>Get a random chord!</div>
+            selector: "#preloadshuffle",
+            title: "Shuffle!",
+            body: "Get a random chord!"
           },
           {
             step: 2,
             selector: ".chordform",
-            body: <div style={{color: "yellow"}}>Or select a chord here.</div>
+            title: "See!",
+            body: "Or select a chord here."
           },
           {
             step: 3,
             selector: ".hard",
-            body: <div style={{color: "yellow"}}>Listen to the chord and watch it play on this keyboard</div>
+            title: "Listen!",
+            body: "Listen to the chord and watch it play on this keyboard",
+            position: "top"
           },
           {
             step: 4,
             selector: ".mainkeyboardholder",
-            body: <div style={{color: "yellow"}}>Play it back using your computer keyboard!</div>
+            title: "Play!",
+            body: "Play it back using your computer keyboard!",
+            position: "bottom"
           },
           {
             step: 5,
             selector: ".hardbutton",
-            body: <div style={{color: "yellow"}}>If you want a challenge, try hard mode</div>
+            title: "Hard Mode",
+            body: "If you want a challenge, try hard mode",
+            position: "top-right"
           }
         ]}
       />
