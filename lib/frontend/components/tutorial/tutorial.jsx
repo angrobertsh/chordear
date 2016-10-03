@@ -23,42 +23,40 @@ class Tutorial extends React.Component{
           {
             step: 1,
             selector: "#preloadshuffle",
-            title: "Shuffle!",
-            body: "Get a random chord!"
+            title: <div className="tour-title">Shuffle!</div>,
+            body: <div className="tour-body">Get a random chord!</div>
           },
           {
             step: 2,
             selector: ".chordform",
-            title: "See!",
-            body: "Or select a chord here."
+            title: <div className="tour-title">(Or select)</div>,
+            body: <div className="tour-body">Or select a chord here.</div>
           },
           {
             step: 3,
             selector: ".hard",
-            title: "Listen!",
-            body: "Listen to the chord and watch it play on this keyboard",
+            title: <div className="tour-title">Listen!</div>,
+            body: <div className="tour-body">Listen and watch it be played here.</div>,
             position: "top"
           },
           {
             step: 4,
             selector: ".mainkeyboardholder",
-            title: "Play!",
-            body: "Play it back using your computer keyboard!",
+            title: <div className="tour-title">Play!</div>,
+            body: <div className="tour-body">Play it back with your computer keyboard!</div>,
             position: "bottom"
           },
           {
             step: 5,
             selector: ".hardbutton",
-            title: "Hard Mode",
-            body: "If you want a challenge, try hard mode",
+            title: <div className="tour-title">Hard Mode</div>,
+            body: <div className="tour-body">If you want a challenge, try hard mode</div>,
             position: "top-right"
           }
         ]}
       />
     );
   }
-
-
 
 
 }

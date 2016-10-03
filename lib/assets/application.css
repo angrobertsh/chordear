@@ -321,39 +321,6 @@ button.active {
 
 /*Tutorial*/
 
-.outertut{
-  display: none;
-  height: 100%;
-  width: 100%;
-  background-color: black;
-  font-size: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  color: white;
-}
-
-.innertut{
-}
-
-.tutorial1{
-  z-index: 10;
-  display: block;
-}
-
-.tutorial2{
-
-}
-
-.tutorial3{
-
-}
-
-.tutorial4{
-
-}
-
 #underlay{
   display: flex;
   position: absolute;
@@ -368,4 +335,46 @@ button.active {
   visibility: hidden;
   position: absolute;
   top: 295px;
+}
+
+.react-user-tour-close{
+  font-weight: bold;
+  padding: 7px;
+  background-color: blue;
+}
+
+.react-user-tour-button-container{
+
+}
+
+.react-user-tour-next-button{
+  font-weight: bold;
+  width: 36px;
+  padding: 7px 6px 7px 10px;
+  background-color: blue;
+}
+
+.react-user-tour-back-button{
+  font-weight: bold;
+  width: 36px;
+  padding: 7px 6px 7px 10px;
+  background-color: blue;
+}
+
+.react-user-tour-done-button{
+  font-weight: bold;
+  width: 36px;
+  padding: 7px 6px 7px 10px;
+  background-color: blue;
+}
+
+.tour-title{
+  font-size: 24px;
+  padding: 10px;
+}
+
+.tour-body{
+  padding-left: 10px;
+  font-size: 18px;
+
 }
