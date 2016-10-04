@@ -168,12 +168,12 @@ class Chordselect extends React.Component{
       $(".hard").addClass("hidden");
       $(".hardnone").addClass("none");
       this.state.hard = false;
-      $(".hardbutton").html("Easy Mode");
+      $(".hardimg").attr("src", "http://res.cloudinary.com/dujcpxlhk/image/upload/v1475614715/ce0cysxukiylipla8mjm.gif");
     } else {
       $(".hard").removeClass("hidden");
       $(".hardnone").removeClass("none");
       this.state.hard = true;
-      $(".hardbutton").html("Hard Mode");
+      $(".hardimg").attr("src", "http://res.cloudinary.com/dujcpxlhk/image/upload/v1475614680/qkrw8ar0byo2elmxh7dd.png");
     }
     this.forceUpdate();
   }
@@ -197,7 +197,7 @@ class Chordselect extends React.Component{
         <div className="subkeyboardholder">
           <div className="sharpholder hard">{displaySharps}</div>
           <div className="regholder hard">{displayRegs}</div>
-          <div className="optionbox"><button className="playbutton" onClick={this.playChord}><img src="https://res.cloudinary.com/dujcpxlhk/image/upload/v1474012677/i2venetyavxccykpphye.png" /></button><button className="shufflebutton" onClick={this.selectRandomChord}><img src="https://res.cloudinary.com/dujcpxlhk/image/upload/v1474012770/prwsmvpx4w38jrs9rpnh.png" /></button><button className="hardbutton" onClick={this.hardmode}>Hard Mode</button></div>
+          <div className="optionbox"><button className="playbutton" onClick={this.playChord}><img src="https://res.cloudinary.com/dujcpxlhk/image/upload/v1474012677/i2venetyavxccykpphye.png" /></button><button className="shufflebutton" onClick={this.selectRandomChord}><img src="https://res.cloudinary.com/dujcpxlhk/image/upload/v1474012770/prwsmvpx4w38jrs9rpnh.png" /></button><button className="hardbutton" onClick={this.hardmode}><img className="hardimg" src="http://res.cloudinary.com/dujcpxlhk/image/upload/v1475614680/qkrw8ar0byo2elmxh7dd.png" /></button></div>
         </div>
       </div>);
   }

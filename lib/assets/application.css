@@ -218,6 +218,7 @@ button.active {
 }
 
 .playbutton{
+  padding: 0;
   border: none;
 }
 
@@ -240,8 +241,15 @@ button.active {
 }
 
 .hardbutton {
-  width: 84px;
-  background-color: white;
+  border: none;
+  width: 25px;
+  height: 25px;
+}
+
+.hardimg{
+  height: 24px;
+  width: 24px;
+  margin-right: 7px;
 }
 
 /* --- KEYBOARD SUB --- */
@@ -335,6 +343,7 @@ button.active {
   visibility: hidden;
   position: absolute;
   top: 295px;
+  padding-right: 10px;
 }
 
 .react-user-tour-close{
@@ -377,4 +386,20 @@ button.active {
   padding-left: 10px;
   font-size: 18px;
 
+}
+
+#star{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+
+#starimg{
+  height: 300px;
+  width: 300px;
+  z-index: 5;
+  display: none;
 }
