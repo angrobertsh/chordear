@@ -76,14 +76,18 @@ class Chordselect extends React.Component{
   }
 
   playChord(){
-    for(let j = 0; j < this.state.notes.length; j++) {
-      if(this.props.chord.includes(TONE_UTILS.TONE_MAP[this.state.notes[j].freq])){
-         this.state.notes[j].start();
-         this.state.active.push(this.state.notes[j].letter);
+    if(this.props.chord.length > 1){
+      for(let j = 0; j < this.state.notes.length; j++) {
+        if(this.props.chord.includes(TONE_UTILS.TONE_MAP[this.state.notes[j].freq])){
+           this.state.notes[j].start();
+           this.state.active.push(this.state.notes[j].letter);
+        }
       }
+      this.forceUpdate();
+      setTimeout(this.stopChords, 700);
+    } else {
+      $(".message").html(`No chord selected, please shuffle or select`);
     }
-    this.forceUpdate();
-    setTimeout(this.stopChords, 700);
   }
 
   stopChords(){
