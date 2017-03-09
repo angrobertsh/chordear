@@ -106,8 +106,10 @@ class Chordselect extends React.Component{
       this.props.selectChord( this.state.majmin, this.state.rootchoice );
       this.state.newchordvar = true;
       this.forceUpdate();
+    } else if(this.state.majmin === "") {
+      alert("Please select major or minor.");
     } else {
-      alert("Please select a chord.")
+      alert("Please select a chord.");
     }
   }
 
