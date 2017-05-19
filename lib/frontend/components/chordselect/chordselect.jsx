@@ -14,6 +14,7 @@ class Chordselect extends React.Component{
     this.freqregs = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99];
     this.keysharps = [2, 3, 5, 6, 7, 9, 0, '='];
     this.keyregs = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']'];
+    this.timeout;
     this.state = {
       newchordvar: false,
       majmin: "",
@@ -77,26 +78,28 @@ class Chordselect extends React.Component{
   }
 
   playChord(){
-    if(this.props.chord.length > 1){
-      for(let j = 0; j < this.state.notes.length; j++) {
-        if(this.props.chord.includes(TONE_UTILS.TONE_MAP[this.state.notes[j].freq])){
-           this.state.notes[j].start();
-           this.state.active.push(this.state.notes[j].letter);
+    clearTimeout(this.timeout);
+    this.stopChords( () => {
+      let currentNotes = this.state.active;
+      if(this.props.chord.length > 1){
+        for(let j = 0; j < this.state.notes.length; j++) {
+          if(this.props.chord.includes(TONE_UTILS.TONE_MAP[this.state.notes[j].freq])){
+             this.state.notes[j].start();
+             currentNotes.push(this.state.notes[j].letter);
+          }
         }
+        this.setState({active: currentNotes}, () => {this.timeout = setTimeout(this.stopChords, 700)})
+      } else {
+        document.getElementsByClassName("message")[0].innerHTML = `No chord selected, please shuffle or select`;
       }
-      this.forceUpdate();
-      setTimeout(this.stopChords, 700);
-    } else {
-      $(".message").html(`No chord selected, please shuffle or select`);
-    }
+    });
   }
 
-  stopChords(){
+  stopChords(cb = () => {}){
     for(let m = 0; m < this.state.notes.length; m++){
       this.state.notes[m].stop();
     }
-    this.setState({active: []});
-    this.forceUpdate();
+    this.setState({active: []}, cb);
   }
 
   handleSubmit(e) {
@@ -105,8 +108,7 @@ class Chordselect extends React.Component{
       let letter = this.state.rootchoice;
       this.changeMessage(letter, this.state.majmin);
       this.props.selectChord( this.state.majmin, this.state.rootchoice );
-      this.state.newchordvar = true;
-      this.forceUpdate();
+      this.setState({newchordvar: true});
     } else if(this.state.majmin === "") {
       alert("Please select major or minor.");
     } else {
@@ -184,9 +186,9 @@ class Chordselect extends React.Component{
 
   hardButtons(){
     if(this.state.hard){
-      return (<div className="optionbox"><button className="playbutton" onClick={this.playChord}></button><button className="shufflebutton" onClick={this.selectRandomChord}></button><button className="easybutton none" onClick={this.hardmode}></button><button className="hardbutton" onClick={this.hardmode}></button></div>)
+      return (<div className="optionbox"><button className="playbutton" onClick={(e) => {e.preventDefault; this.playChord();}}></button><button className="shufflebutton" onClick={(e) => {e.preventDefault; this.selectRandomChord();}}></button><button className="easybutton none" onClick={this.hardmode}></button><button className="hardbutton" onClick={this.hardmode}></button></div>)
     } else {
-      return (<div className="optionbox"><button className="playbutton" onClick={this.playChord}></button><button className="shufflebutton" onClick={this.selectRandomChord}></button><button className="easybutton" onClick={this.hardmode}></button><button className="hardbutton none" onClick={this.hardmode}></button></div>)
+      return (<div className="optionbox"><button className="playbutton" onClick={(e) => {e.preventDefault; this.playChord();}}></button><button className="shufflebutton" onClick={(e) => {e.preventDefault; this.selectRandomChord();}}></button><button className="easybutton" onClick={this.hardmode}></button><button className="hardbutton none" onClick={this.hardmode}></button></div>)
     }
   }
 
