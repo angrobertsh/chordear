@@ -49,9 +49,9 @@ class Chordselect extends React.Component{
       letter = letter + "#";
     }
     if(this.state.hard === false){
-      $(".message").html(`Play the <span class="hardnone none">${letter} ${majmin}</span> chord!`);
+      document.getElementsByClassName("message")[0].innerHTML = `Play the <span class="hardnone none">${letter} ${majmin}</span> chord!`;
     } else {
-      $(".message").html(`Play the <span class="hardnone">${letter} ${majmin}</span> chord!`);
+      document.getElementsByClassName("message")[0].innerHTML = `Play the <span class="hardnone">${letter} ${majmin}</span> chord!`;
     }
   }
 
@@ -174,10 +174,14 @@ class Chordselect extends React.Component{
 
   hardmode() {
     if(this.state.hard){
+      // document.getElementsByClassName("hard").forEach((el) => el.classList.add("hidden"))
+      // document.getElementsByClassName("hardnone").forEach((el) => el.classList.add("none"))
       $(".hard").addClass("hidden");
       $(".hardnone").addClass("none");
       this.setState({hard: false});
     } else {
+      // document.getElementsByClassName("hard").forEach((el) => el.classList.remove("hidden"))
+      // document.getElementsByClassName("hardnone").forEach((el) => el.classList.remove("none"))
       $(".hard").removeClass("hidden");
       $(".hardnone").removeClass("none");
       this.setState({hard: true});
@@ -186,9 +190,9 @@ class Chordselect extends React.Component{
 
   hardButtons(){
     if(this.state.hard){
-      return (<div className="optionbox"><button className="playbutton" onClick={(e) => {e.preventDefault; this.playChord();}}></button><button className="shufflebutton" onClick={(e) => {e.preventDefault; this.selectRandomChord();}}></button><button className="easybutton none" onClick={this.hardmode}></button><button className="hardbutton" onClick={this.hardmode}></button></div>)
+      return ([<button key="easy" className="easybutton none" onClick={this.hardmode}></button>, <button key="hard" className="hardbutton" onClick={this.hardmode}></button>]);
     } else {
-      return (<div className="optionbox"><button className="playbutton" onClick={(e) => {e.preventDefault; this.playChord();}}></button><button className="shufflebutton" onClick={(e) => {e.preventDefault; this.selectRandomChord();}}></button><button className="easybutton" onClick={this.hardmode}></button><button className="hardbutton none" onClick={this.hardmode}></button></div>)
+      return ([<button key="easy" className="easybutton" onClick={this.hardmode}></button>, <button key="hard" className="hardbutton none" onClick={this.hardmode}></button>]);
     }
   }
 
@@ -212,7 +216,11 @@ class Chordselect extends React.Component{
         <div className="subkeyboardholder">
           <div className="sharpholder hard">{displaySharps}</div>
           <div className="regholder hard">{displayRegs}</div>
-          { hardButtons }
+          <div className="optionbox">
+            <button className="playbutton" onClick={(e) => {e.preventDefault; this.playChord();}}><img src="https://res.cloudinary.com/dujcpxlhk/image/upload/v1474012677/i2venetyavxccykpphye.png"/></button>
+            <button className="shufflebutton" onClick={(e) => {e.preventDefault; this.selectRandomChord();}}><img src="https://res.cloudinary.com/dujcpxlhk/image/upload/v1474012770/prwsmvpx4w38jrs9rpnh.png"/></button>
+            { hardButtons }
+          </div>
         </div>
       </div>);
   }

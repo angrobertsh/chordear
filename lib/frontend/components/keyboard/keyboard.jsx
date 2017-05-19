@@ -2,7 +2,6 @@ import React from 'react';
 import Note from '../../util/note';
 import * as TONE_UTILS from '../../util/tones';
 import * as CHORD_UTILS from '../../util/chords';
-import $ from 'jquery';
 import NoteKey from './note_key';
 import SharpKey from './sharp_key';
 
@@ -30,8 +29,8 @@ class Keyboard extends React.Component{
   }
 
   componentDidMount() {
-    $(document).on('keydown', e => this.onKeyDown(e));
-    $(document).on('keyup', e => this.onKeyUp(e));
+    document.addEventListener('keydown', e => this.onKeyDown(e));
+    document.addEventListener('keyup', e => this.onKeyUp(e));
   }
 
   onKeyUp(e){
