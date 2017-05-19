@@ -39,6 +39,7 @@ class Chordselect extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.chordSelectForm = this.chordSelectForm.bind(this);
     this.changeMessage = this.changeMessage.bind(this);
+    this.hardButtons = this.hardButtons.bind(this);
   }
 
   changeMessage(letter, majmin){
@@ -173,19 +174,25 @@ class Chordselect extends React.Component{
     if(this.state.hard){
       $(".hard").addClass("hidden");
       $(".hardnone").addClass("none");
-      this.state.hard = false;
-      $(".hardimg").attr("src", "http://res.cloudinary.com/dujcpxlhk/image/upload/v1475614715/ce0cysxukiylipla8mjm.gif");
+      this.setState({hard: false});
     } else {
       $(".hard").removeClass("hidden");
       $(".hardnone").removeClass("none");
-      this.state.hard = true;
-      $(".hardimg").attr("src", "http://res.cloudinary.com/dujcpxlhk/image/upload/v1475614680/qkrw8ar0byo2elmxh7dd.png");
+      this.setState({hard: true});
     }
-    this.forceUpdate();
   }
 
+  hardButtons(){
+    if(this.state.hard){
+      return (<div className="optionbox"><button className="playbutton" onClick={this.playChord}></button><button className="shufflebutton" onClick={this.selectRandomChord}></button><button className="easybutton none" onClick={this.hardmode}></button><button className="hardbutton" onClick={this.hardmode}></button></div>)
+    } else {
+      return (<div className="optionbox"><button className="playbutton" onClick={this.playChord}></button><button className="shufflebutton" onClick={this.selectRandomChord}></button><button className="easybutton" onClick={this.hardmode}></button><button className="hardbutton none" onClick={this.hardmode}></button></div>)
+    }
+  }
 
   render() {
+    const hardButtons = this.hardButtons();
+
     const displaySharps = this.keysharps.map((number, idx) => {
       return (<SharpKey key={idx} scale={TONE_UTILS.NOTE_MAP_INVERTED[number]} pressed={this.state.active.includes(number)}/>);
     });
@@ -203,7 +210,7 @@ class Chordselect extends React.Component{
         <div className="subkeyboardholder">
           <div className="sharpholder hard">{displaySharps}</div>
           <div className="regholder hard">{displayRegs}</div>
-          <div className="optionbox"><button className="playbutton" onClick={this.playChord}><img src="https://res.cloudinary.com/dujcpxlhk/image/upload/v1474012677/i2venetyavxccykpphye.png" /></button><button className="shufflebutton" onClick={this.selectRandomChord}><img src="https://res.cloudinary.com/dujcpxlhk/image/upload/v1474012770/prwsmvpx4w38jrs9rpnh.png" /></button><button className="hardbutton" onClick={this.hardmode}><img className="hardimg" src="http://res.cloudinary.com/dujcpxlhk/image/upload/v1475614680/qkrw8ar0byo2elmxh7dd.png" /></button></div>
+          { hardButtons }
         </div>
       </div>);
   }
