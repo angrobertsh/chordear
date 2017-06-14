@@ -226,11 +226,11 @@ button.active {
 }
 
 .hardbutton {
-  background-image: url("http://res.cloudinary.com/dujcpxlhk/image/upload/v1475614680/qkrw8ar0byo2elmxh7dd.png");
+  background-image: url("https://res.cloudinary.com/dujcpxlhk/image/upload/v1475614680/qkrw8ar0byo2elmxh7dd.png");
 }
 
 .easybutton{
-  background-image: url("http://res.cloudinary.com/dujcpxlhk/image/upload/v1475614715/ce0cysxukiylipla8mjm.gif");
+  background-image: url("https://res.cloudinary.com/dujcpxlhk/image/upload/v1475614715/ce0cysxukiylipla8mjm.gif");
 }
 
 .optionbox button img {
@@ -338,6 +338,7 @@ button.active {
   font-weight: bold;
   padding: 7px;
   background-color: rgba(0, 12, 255, .25);
+  cursor: pointer;
 }
 
 .react-user-tour-button-container{
@@ -349,6 +350,7 @@ button.active {
   width: 36px;
   padding: 7px 6px 7px 10px;
   background-color: rgba(0, 12, 255, .25);
+  cursor: pointer;
 }
 
 .react-user-tour-back-button{
@@ -363,6 +365,7 @@ button.active {
   width: 36px;
   padding: 7px 6px 7px 10px;
   background-color: rgba(0, 12, 255, .25);
+  cursor: pointer;
 }
 
 .tour-title{
