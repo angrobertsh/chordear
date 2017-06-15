@@ -334,6 +334,10 @@ button.active {
   padding-right: 10px;
 }
 
+.react-user-tour-container > div {
+  border: 1px solid rgba(0, 0, 0, .4);
+}
+
 .react-user-tour-close{
   font-weight: bold;
   padding: 7px;
