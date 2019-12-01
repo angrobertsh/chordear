@@ -3,7 +3,8 @@ import Chordselect from './chordselect';
 import * as ACTIONS from '../../actions/note_actions';
 
 const mapStateToProps = (state) => ({
-  chord: state.notes.chord
+  chord: state.notes.chord,
+  notes: state.notes.notes
 });
 
 const mapDispatchToProps = (dispatch) => ({
