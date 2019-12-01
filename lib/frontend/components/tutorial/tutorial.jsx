@@ -1,5 +1,6 @@
 import React from 'react';
 import Tour from "react-user-tour";
+import NOTES from '../../util/audio_initializer';
 
 class Tutorial extends React.Component{
 
@@ -16,9 +17,9 @@ class Tutorial extends React.Component{
       <Tour
         active={this.state.isTourActive}
         step={this.state.tourStep}
-        onNext={(step) => this.setState({tourStep: step}, this.props.initializeAudioAPI)}
-        onBack={(step) => this.setState({tourStep: step}, this.props.initializeAudioAPI)}
-        onCancel={() => this.setState({isTourActive: false}, this.props.initializeAudioAPI}
+        onNext={(step) => this.setState({tourStep: step}, () => {this.props.notes.length === 0 ? this.props.setNotes(NOTES) : null})}
+        onBack={(step) => this.setState({tourStep: step}, () => {this.props.notes.length === 0 ? this.props.setNotes(NOTES) : null})}
+        onCancel={() => this.setState({isTourActive: false}, () => {this.props.notes.length === 0 ? this.props.setNotes(NOTES) : null})}
         steps={[
           {
             step: 1,

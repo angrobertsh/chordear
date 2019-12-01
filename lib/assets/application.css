@@ -335,7 +335,7 @@ button.active {
 }
 
 .react-user-tour-container > div {
-  border: 1px solid rgba(0, 0, 0, .4);
+  border: 1px solid rgba(0, 0, 0, .6);
 }
 
 .react-user-tour-close{
