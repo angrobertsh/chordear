@@ -10,10 +10,6 @@ class Chordselect extends React.Component{
 
   constructor(props){
     super(props);
-    this.freqsharps = [277.18, 311.13, 369.99, 415.30, 466.16, 554.37, 622.25, 739.99];
-    this.freqregs = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99];
-    this.keysharps = [2, 3, 5, 6, 7, 9, 0, '='];
-    this.keyregs = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']'];
     this.timeout;
     this.state = {
       newchordvar: false,
@@ -22,14 +18,6 @@ class Chordselect extends React.Component{
       notes: [],
       active: [],
       hard: true
-    }
-    for(let i = 0; i < this.freqsharps.length; i++)
-    {
-      this.state.notes.push(new Note(this.freqsharps[i], this.keysharps[i]))
-    }
-    for(let j = 0; j < this.freqregs.length; j++)
-    {
-      this.state.notes.push(new Note(this.freqregs[j], this.keyregs[j]))
     }
 
     this.hardmode = this.hardmode.bind(this);
@@ -82,10 +70,10 @@ class Chordselect extends React.Component{
     this.stopChords( () => {
       let currentNotes = this.state.active;
       if(this.props.chord.length > 1){
-        for(let j = 0; j < this.state.notes.length; j++) {
-          if(this.props.chord.includes(TONE_UTILS.TONE_MAP[this.state.notes[j].freq])){
-             this.state.notes[j].start();
-             currentNotes.push(this.state.notes[j].letter);
+        for(let j = 0; j < this.props.notes.length; j++) {
+          if(this.props.chord.includes(TONE_UTILS.TONE_MAP[this.props.notes[j].freq])){
+             this.props.notes[j].start();
+             currentNotes.push(this.props.notes[j].letter);
           }
         }
         this.setState({active: currentNotes}, () => {this.timeout = setTimeout(this.stopChords, 700)})
@@ -96,8 +84,8 @@ class Chordselect extends React.Component{
   }
 
   stopChords(cb = () => {}){
-    for(let m = 0; m < this.state.notes.length; m++){
-      this.state.notes[m].stop();
+    for(let m = 0; m < this.props.notes.length; m++){
+      this.props.notes[m].stop();
     }
     this.setState({active: []}, cb);
   }
@@ -199,11 +187,11 @@ class Chordselect extends React.Component{
   render() {
     const hardButtons = this.hardButtons();
 
-    const displaySharps = this.keysharps.map((number, idx) => {
+    const displaySharps = TONE_UTILS.KEY_SHARPS.map((number, idx) => {
       return (<SharpKey key={idx} scale={TONE_UTILS.NOTE_MAP_INVERTED[number]} pressed={this.state.active.includes(number)}/>);
     });
 
-    const displayRegs = this.keyregs.map((letter, idx) => {
+    const displayRegs = TONE_UTILS.KEY_REGS.map((letter, idx) => {
       return (<NoteKey key={idx} scale={TONE_UTILS.NOTE_MAP_INVERTED[letter]} pressed={this.state.active.includes(letter)}/>);
     });
 
