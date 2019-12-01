@@ -16,9 +16,9 @@ class Tutorial extends React.Component{
       <Tour
         active={this.state.isTourActive}
         step={this.state.tourStep}
-        onNext={(step) => this.setState({tourStep: step})}
-        onBack={(step) => this.setState({tourStep: step})}
-        onCancel={() => this.setState({isTourActive: false})}
+        onNext={(step) => this.setState({tourStep: step}, this.props.initializeAudioAPI)}
+        onBack={(step) => this.setState({tourStep: step}, this.props.initializeAudioAPI)}
+        onCancel={() => this.setState({isTourActive: false}, this.props.initializeAudioAPI}
         steps={[
           {
             step: 1,
